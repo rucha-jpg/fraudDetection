@@ -1,0 +1,8 @@
+{
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "python.defaultInterpreterPath": "/Users/rucha/fraudDetection/backend/venv/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "terminal.integrated.env.osx": {
+        "PATH": "/Users/rucha/fraudDetection/backend/venv/bin:${PATH}"
+    }
+}

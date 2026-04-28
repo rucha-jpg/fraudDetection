@@ -18,14 +18,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ─── Paths ───────────────────────────────────────────────────────────────────
+# Paths
 BASE_DIR       = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_PATH     = os.path.join(BASE_DIR, "model", "fraud_model.pkl")
 SCALER_PATH    = os.path.join(BASE_DIR, "model", "scaler.pkl")
 EXPLAINER_PATH = os.path.join(BASE_DIR, "model", "shap_explainer.pkl")
 STATS_PATH     = os.path.join(BASE_DIR, "model", "stats.json")
 
-# ─── Globals ─────────────────────────────────────────────────────────────────
+# Globals
 pipeline  = None
 scaler    = None
 explainer = None
@@ -41,7 +41,7 @@ def load_model():
     else:
         print("⚠️  Model not found. Run train.py first.")
 
-# ─── Schemas ─────────────────────────────────────────────────────────────────
+# Schemas 
 class Transaction(BaseModel):
     Time: float
     Amount: float
@@ -66,7 +66,7 @@ class PredictionResponse(BaseModel):
     top_features: List[dict]
     timestamp: str
 
-# ─── Helpers ─────────────────────────────────────────────────────────────────
+#  Helpers 
 FEATURE_NAMES = ["Time", "Amount"] + [f"V{i}" for i in range(1, 29)]
 
 def get_risk_level(prob: float) -> str:
@@ -82,7 +82,7 @@ def get_top_features(shap_vals, n=5):
     )[:n]
     return [{"feature": k, "shap_value": round(float(v), 6)} for k, v in pairs]
 
-# ─── Routes ──────────────────────────────────────────────────────────────────
+#  Routes
 @app.get("/health")
 def health():
     return {
